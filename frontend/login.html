@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenPulse | Welcome</title>
+    <link rel="stylesheet" href="auth.css">
+</head>
+
+<body>
+
+    <div class="auth-container">
+
+        <div class="auth-left">
+            <div class="brand">
+                <span class="brand-icon">✦</span>
+                <span>GreenPulse</span>
+            </div>
+
+            <div class="welcome-content">
+                <span class="eyebrow">SMART ENERGY MANAGEMENT</span>
+
+                <h1>Powering a<br>
+                    <span>Greener Future.</span>
+                </h1>
+
+                <p>
+                    Monitor renewable energy, track performance
+                    and make smarter energy decisions with GreenPulse.
+                </p>
+
+                <div class="energy-decoration">
+                    <div class="energy-circle">🌱</div>
+                    <div>
+                        <strong>Clean Energy.</strong>
+                        <p>Smarter Monitoring. Better Tomorrow.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="left-footer">
+                © 2026 GreenPulse. All rights reserved.
+            </div>
+        </div>
+
+
+        <div class="auth-right">
+
+            <div class="auth-card">
+
+                <div class="mobile-brand">✦ GreenPulse</div>
+
+                <div class="auth-heading">
+                    <h2 id="formTitle">Welcome Back!</h2>
+                    <p id="formSubtitle">
+                        Sign in to access your energy dashboard.
+                    </p>
+                </div>
+
+
+                <!-- Login Form -->
+
+                <form id="loginForm">
+
+                    <label>Email Address</label>
+                    <input
+                        type="email"
+                        id="loginEmail"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                    <label>Password</label>
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                    <div class="form-options">
+                        <label class="remember">
+                            <input type="checkbox" id="rememberMe">
+                            Remember me
+                        </label>
+
+                        <a href="#" id="forgotPassword">
+                            Forgot password?
+                        </a>
+                    </div>
+
+                    <button type="submit" class="auth-button">
+                        Sign In
+                    </button>
+
+                </form>
+
+
+                <!-- Registration Form -->
+
+                <form id="registerForm" class="hidden">
+
+                    <label>Full Name</label>
+                    <input
+                        type="text"
+                        id="registerName"
+                        placeholder="Enter your full name"
+                        required
+                    >
+
+                    <label>Email Address</label>
+                    <input
+                        type="email"
+                        id="registerEmail"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                    <label>Password</label>
+                    <input
+                        type="password"
+                        id="registerPassword"
+                        placeholder="Create a password (minimum 8 characters)"
+                        minlength="8"
+                        required
+                    >
+
+                    <label>Confirm Password</label>
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Confirm your password"
+                        required
+                    >
+
+                    <button type="submit" class="auth-button">
+                        Create Account
+                    </button>
+
+                </form>
+
+
+                <div id="authMessage" class="auth-message"></div>
+
+
+                <div class="switch-auth">
+                    <span id="switchText">Don't have an account?</span>
+                    <button type="button" id="switchButton">
+                        Sign Up
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="auth.js"></script>
+
+</body>
+</html>

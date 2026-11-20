@@ -1,0 +1,886 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GreenPulse | Renewable Energy Monitoring</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>⚡ GreenPulse</h2>
+            <p>Energy Intelligence</p>
+        </div>
+
+        <nav class="navigation">
+
+            <a href="#overview" class="nav-link active" data-page="overview">
+                Overview
+            </a>
+
+            <a href="#devices" class="nav-link" data-page="devices">
+                Devices
+            </a>
+
+            <a href="#analytics" class="nav-link" data-page="analytics">
+                Analytics
+            </a>
+
+            <a href="#ai-insights" class="nav-link" data-page="ai-insights">
+                AI Insights
+            </a>
+
+            <a href="#alerts" class="nav-link" data-page="alerts">
+                Alerts
+            </a>
+
+            <a href="#my-profile" class="nav-link" data-page="my-profile">
+                My Profile
+            </a>
+
+            <a href="#settings" class="nav-link" data-page="settings">
+                Settings
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+            <p>Smart Renewable Energy</p>
+            <span>Monitoring Platform</span>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div class="profile" id="profileMenu">
+
+                <button
+                    type="button"
+                    class="profile-trigger"
+                    id="profileTrigger"
+                    aria-haspopup="true"
+                    aria-expanded="false">
+
+                    <span id="profileRole" hidden>User</span>
+
+                    <div class="profile-icon" id="profileIcon">U</div>
+
+                    <div class="profile-trigger-user">
+                        <strong id="profileName">User</strong>
+                        <span id="profileEmail">user@example.com</span>
+                    </div>
+
+                </button>
+
+                <div class="profile-dropdown" id="profileDropdown" hidden>
+
+                    <div class="profile-dropdown-divider"></div>
+
+                    <button type="button" id="switchAccountBtn">
+                        <span>⇄</span>
+                        Switch Account
+                    </button>
+
+                    <button type="button" id="logoutBtn" class="logout-option">
+                        <span>↪</span>
+                        Logout
+                    </button>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- OVERVIEW PAGE -->
+
+        <section id="overviewPage" class="page-section">
+
+            <section class="welcome-section">
+
+                <div>
+                    <p>WELCOME BACK</p>
+                    <h2>Powering a Greener Future 🌱</h2>
+                    <span>
+                        Track, analyze and optimize your renewable energy.
+                    </span>
+                </div>
+
+            </section>
+
+
+            <!-- SUMMARY CARDS -->
+
+            <section class="summary-cards">
+
+                <div class="summary-card">
+                    <p>Total Generation</p>
+                    <h2 id="totalGenerated">0 kWh</h2>
+                    <span>Renewable energy produced</span>
+                </div>
+
+                <div class="summary-card">
+                    <p>Total Consumption</p>
+                    <h2 id="totalConsumed">0 kWh</h2>
+                    <span>Energy consumed</span>
+                </div>
+
+                <div class="summary-card">
+                    <p>Solar Generation</p>
+                    <h2 id="solarGeneration">0 kWh</h2>
+                    <span>Solar energy produced</span>
+                </div>
+
+                <div class="summary-card">
+                    <p>Wind Generation</p>
+                    <h2 id="windGeneration">0 kWh</h2>
+                    <span>Wind energy produced</span>
+                </div>
+
+            </section>
+
+
+            <!-- OVERVIEW CHARTS -->
+
+            <section class="charts-section">
+
+                <div class="chart-card">
+                    <h3>Energy Generation Overview</h3>
+                    <canvas id="overviewEnergyChart"></canvas>
+                </div>
+
+                <div class="chart-card">
+                    <h3>Solar vs Wind Generation</h3>
+                    <canvas id="overviewSourceChart"></canvas>
+                </div>
+
+            </section>
+
+
+            <!-- DEVICE MONITORING -->
+
+            <section class="content-card">
+
+                <div class="section-heading">
+
+                    <div class="section-icon device-icon">⚡</div>
+
+                    <div>
+                        <h3>Device Monitoring</h3>
+                        <p>Track and monitor your connected energy devices</p>
+                    </div>
+
+                </div>
+
+                <div id="deviceList">
+                    Loading devices...
+                </div>
+
+            </section>
+
+
+            <!-- OVERVIEW AI INSIGHTS -->
+
+            <section class="content-card">
+
+                <div class="section-heading">
+
+                    <div class="section-icon ai-icon">✦</div>
+
+                    <div>
+                        <h3>AI-Powered Energy Insights</h3>
+                        <p>Detect anomalies and receive recommendations.</p>
+                    </div>
+
+                </div>
+
+                <div id="aiInsightsOverview">
+                    Loading AI insights...
+                </div>
+
+            </section>
+
+
+            <!-- OVERVIEW ALERTS -->
+
+            <section class="content-card">
+
+                <div class="section-heading">
+
+                    <div class="section-icon alert-icon">🔔</div>
+
+                    <div>
+                        <h3>Recent Alerts</h3>
+                        <p>Stay updated on device notifications and issues.</p>
+                    </div>
+
+                </div>
+
+                <div id="alertListOverview">
+                    Loading alerts...
+                </div>
+
+            </section>
+
+        </section>
+
+
+        <!-- DEVICES PAGE -->
+
+        <section id="devicesPage" class="page-section" style="display: none;">
+
+            <div class="page-header devices-page-header">
+
+                <div class="page-heading">
+                    <h2>Device Management</h2>
+                    <p>
+                        Monitor and manage your renewable energy devices.
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    class="add-device-btn"
+                    onclick="openAddDeviceForm()">
+
+                    + Add New Device
+
+                </button>
+
+            </div>
+
+
+            <!-- DEVICE STATISTICS -->
+
+            <div class="device-stats">
+
+                <div class="device-stat-card">
+                    <h4>Total Devices</h4>
+                    <h2 id="totalDevices">0</h2>
+                </div>
+
+                <div class="device-stat-card">
+                    <h4>Active Devices</h4>
+                    <h2 id="activeDevices">0</h2>
+                </div>
+
+                <div class="device-stat-card">
+                    <h4>Solar Devices</h4>
+                    <h2 id="solarDevices">0</h2>
+                </div>
+
+                <div class="device-stat-card">
+                    <h4>Wind Devices</h4>
+                    <h2 id="windDevices">0</h2>
+                </div>
+
+            </div>
+
+
+            <!-- REGISTERED DEVICES -->
+
+            <div class="content-card">
+
+                <h3>Registered Devices</h3>
+                <p>View and manage all connected energy devices.</p>
+
+                <div id="managementDeviceList">
+                    Loading devices...
+                </div>
+
+            </div>
+
+
+            <!-- ENERGY READING ENTRY -->
+
+            <div class="content-card" id="energyEntryCard">
+
+                <h3>Energy Reading Entry</h3>
+
+                <p>
+                    Record the energy generated and consumed
+                    by your registered renewable energy device.
+                </p>
+
+                <form id="energyReadingForm">
+
+                    <label for="energyDeviceSelect">
+                        Select Device
+                    </label>
+
+                    <select id="energyDeviceSelect" required>
+
+                        <option value="">
+                            Loading your devices...
+                        </option>
+
+                    </select>
+
+
+                    <label for="energyGeneratedInput">
+                        Energy Generated (kWh)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="energyGeneratedInput"
+                        min="0"
+                        step="0.01"
+                        placeholder="Example: 25.50"
+                        required
+                    >
+
+
+                    <label for="energyConsumedInput">
+                        Energy Consumed (kWh)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="energyConsumedInput"
+                        min="0"
+                        step="0.01"
+                        placeholder="Example: 12.50"
+                        required
+                    >
+
+
+                    <div class="form-actions">
+
+                        <button
+                            type="submit"
+                            id="saveEnergyReadingButton"
+                            class="add-device-btn">
+
+                            Save Energy Reading
+
+                        </button>
+
+                    </div>
+
+                    <p
+                        id="energyReadingMessage"
+                        role="status"
+                        aria-live="polite">
+                    </p>
+
+                </form>
+
+            </div>
+
+
+            <!-- ADD DEVICE FORM -->
+
+            <div id="addDeviceForm" class="content-card" style="display: none;">
+
+                <h3>Register New Device</h3>
+                <p>Add a new renewable energy device to GreenPulse.</p>
+
+                <form id="deviceForm">
+
+                    <label for="deviceName">Device Name</label>
+
+                    <input
+                        type="text"
+                        id="deviceName"
+                        placeholder="Example: Solar Panel 02"
+                        required
+                    >
+
+                    <label for="deviceType">Device Type</label>
+
+                    <select id="deviceType" required>
+                        <option value="">Select device type</option>
+                        <option value="Solar">Solar</option>
+                        <option value="Wind">Wind</option>
+                    </select>
+
+                    <label for="deviceLocation">Device Location</label>
+
+                    <input
+                        type="text"
+                        id="deviceLocation"
+                        placeholder="Example: College Campus"
+                        required
+                    >
+
+                    <div class="form-actions">
+
+                        <button type="submit" class="add-device-btn">
+                            Register Device
+                        </button>
+
+                        <button
+                            type="button"
+                            class="cancel-device-btn"
+                            onclick="closeAddDeviceForm()">
+
+                            Cancel
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <!-- ANALYTICS PAGE -->
+
+        <section id="analyticsPage" class="page-section" style="display: none;">
+
+            <div class="page-heading">
+                <h2>Energy Analytics</h2>
+                <p>Track your renewable energy generation and consumption.</p>
+            </div>
+
+            <div class="analytics-filter">
+
+                <label for="analyticsDateFilter">Date Range</label>
+
+                <select id="analyticsDateFilter">
+                    <option value="today">Today</option>
+                    <option value="7" selected>Last 7 Days</option>
+                    <option value="30">Last 30 Days</option>
+                </select>
+
+            </div>
+
+            <div class="analytics-summary">
+
+                <div class="summary-card">
+                    <h3>Total Generated</h3>
+                    <p id="analyticsTotalGenerated">-- kWh</p>
+                </div>
+
+                <div class="summary-card">
+                    <h3>Total Consumed</h3>
+                    <p id="analyticsTotalConsumed">-- kWh</p>
+                </div>
+
+                <div class="summary-card">
+                    <h3>Solar Generation</h3>
+                    <p id="analyticsSolarGeneration">-- kWh</p>
+                </div>
+
+                <div class="summary-card">
+                    <h3>Wind Generation</h3>
+                    <p id="analyticsWindGeneration">-- kWh</p>
+                </div>
+
+            </div>
+
+            <section class="charts-section">
+
+                <div class="chart-card">
+                    <h3>Energy Generation Overview</h3>
+                    <canvas id="analyticsEnergyChart"></canvas>
+                </div>
+
+                <div class="chart-card">
+                    <h3>Solar vs Wind Generation</h3>
+                    <canvas id="analyticsSourceChart"></canvas>
+                </div>
+
+            </section>
+
+        </section>
+
+
+        <!-- AI INSIGHTS PAGE -->
+
+        <section id="aiInsightsPage" class="page-section" style="display: none;">
+
+            <div class="page-heading">
+                <h2>AI Energy Insights</h2>
+                <p>
+                    Discover performance patterns, detect anomalies
+                    and get intelligent recommendations.
+                </p>
+            </div>
+
+            <section class="content-card">
+
+                <div class="section-heading">
+
+                    <div class="section-icon ai-icon">✦</div>
+
+                    <div>
+                        <h3>Energy Insights</h3>
+                        <p>Detect anomalies and receive recommendations.</p>
+                    </div>
+
+                </div>
+
+                <div id="aiInsights">
+                    Loading AI insights...
+                </div>
+
+            </section>
+
+        </section>
+
+
+        <!-- ALERTS PAGE -->
+
+        <section id="alertsPage" class="page-section" style="display: none;">
+
+            <div class="page-heading">
+                <h2>Energy Alerts</h2>
+                <p>
+                    Monitor device notifications, system warnings
+                    and energy-related issues.
+                </p>
+            </div>
+
+            <section class="content-card">
+
+                <div class="section-heading">
+
+                    <div class="section-icon alert-icon">🔔</div>
+
+                    <div>
+                        <h3>Recent Alerts</h3>
+                        <p>Stay updated on device notifications and issues.</p>
+                    </div>
+
+                </div>
+
+                <div id="alertList">
+                    Loading alerts...
+                </div>
+
+            </section>
+
+        </section>
+
+
+        <!-- MY PROFILE PAGE -->
+
+        <section id="myProfilePage" class="page-section" style="display: none;">
+
+            <div class="content-card">
+
+                <div class="section-heading">
+
+                    <div class="section-icon device-icon">👤</div>
+
+                    <div>
+                        <h3>My Profile</h3>
+                        <p>Manage your personal GreenPulse account.</p>
+                    </div>
+
+                </div>
+
+                <div class="profile-details">
+
+                    <div class="profile-icon" id="myProfileAvatar">U</div>
+
+                    <h2 id="myProfileName">User</h2>
+
+                    <p id="myProfileEmail">user@example.com</p>
+
+                </div>
+
+                <form id="profileForm">
+
+                    <label for="editUsername">Full Name</label>
+
+                    <input
+                        type="text"
+                        id="editUsername"
+                        placeholder="Enter your name"
+                        required
+                    >
+
+                    <label for="editEmail">Email Address</label>
+
+                    <input
+                        type="email"
+                        id="editEmail"
+                        placeholder="Your email"
+                        disabled
+                    >
+
+                    <button type="submit" class="add-device-btn">
+                        Save Profile
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <!-- SETTINGS PAGE -->
+
+        <section id="settingsPage" class="page-section" style="display: none;">
+
+            <div class="content-card">
+
+                <div class="section-heading">
+
+                    <div class="section-icon ai-icon">⚙️</div>
+
+                    <div>
+                        <h3>Settings</h3>
+                        <p>Customize your GreenPulse experience.</p>
+                    </div>
+
+                </div>
+
+
+                <!-- NOTIFICATION SETTINGS -->
+
+                <div class="settings-item">
+
+                    <div>
+                        <h4>Energy Notifications</h4>
+                        <p>Receive notifications about energy alerts.</p>
+                    </div>
+
+                    <input
+                        type="checkbox"
+                        id="energyNotifications"
+                        checked
+                    >
+
+                </div>
+
+
+                <!-- AI SETTINGS -->
+
+                <div class="settings-item">
+
+                    <div>
+                        <h4>AI Recommendations</h4>
+                        <p>Enable personalized AI energy recommendations.</p>
+                    </div>
+
+                    <input
+                        type="checkbox"
+                        id="aiNotifications"
+                        checked
+                    >
+
+                </div>
+
+
+                <!-- ACCOUNT SECURITY -->
+
+                <div class="settings-item">
+
+                    <div>
+                        <h4>Account Security</h4>
+                        <p>Manage your account password and security.</p>
+                    </div>
+
+                    <button
+                        type="button"
+                        id="changePasswordBtn">
+
+                        Change Password
+
+                    </button>
+
+                </div>
+
+
+                <!-- CHANGE PASSWORD FORM -->
+
+                <div id="changePasswordForm" class="content-card" style="display: none;">
+
+                    <h3>Change Your Password</h3>
+
+                    <p>Update your GreenPulse account password securely.</p>
+
+                    <form id="passwordUpdateForm">
+
+                        <div class="form-group">
+
+                            <label for="currentPassword">Current Password</label>
+
+                            <input
+                                type="password"
+                                id="currentPassword"
+                                placeholder="Enter current password"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="newPassword">New Password</label>
+
+                            <input
+                                type="password"
+                                id="newPassword"
+                                placeholder="Enter new password"
+                                minlength="8"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="confirmNewPassword">Confirm New Password</label>
+
+                            <input
+                                type="password"
+                                id="confirmNewPassword"
+                                placeholder="Confirm new password"
+                                minlength="8"
+                                required
+                            >
+
+                        </div>
+
+                        <label>
+                            <input type="checkbox" id="showPasswordFields">
+                            Show passwords
+                        </label>
+
+                        <p id="passwordMessage" role="status" aria-live="polite"></p>
+
+                        <button type="submit" id="savePasswordBtn">
+                            Update Password
+                        </button>
+
+                        <button type="button" id="cancelPasswordBtn">
+                            Cancel
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <!-- ACCOUNT SWITCHING -->
+
+                <div class="settings-item">
+
+                    <div>
+                        <h4>Account Management</h4>
+                        <p>Switch between your GreenPulse accounts.</p>
+                    </div>
+
+                    <button
+                        type="button"
+                        id="settingsSwitchAccountBtn">
+
+                        Switch Account
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ACCOUNT SWITCHER MODAL -->
+
+<div
+    id="accountSwitcherModal"
+    class="account-switcher-modal"
+    hidden
+    aria-hidden="true">
+
+    <div
+        class="account-switcher-overlay"
+        id="accountSwitcherOverlay">
+    </div>
+
+    <div
+        class="account-switcher-box"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="accountSwitcherTitle">
+
+        <div class="account-switcher-header">
+
+            <div>
+                <h2 id="accountSwitcherTitle">Switch Account</h2>
+                <p>Choose an account to continue with GreenPulse.</p>
+            </div>
+
+            <button
+                type="button"
+                id="closeAccountSwitcherBtn"
+                class="account-switcher-close"
+                aria-label="Close">
+
+                &times;
+
+            </button>
+
+        </div>
+
+        <div class="account-switcher-divider"></div>
+
+        <div
+            id="savedAccountsList"
+            class="saved-accounts-list">
+
+            <p class="account-empty-message">
+                Loading saved accounts...
+            </p>
+
+        </div>
+
+        <div class="account-switcher-divider"></div>
+
+        <button
+            type="button"
+            id="addAnotherAccountBtn"
+            class="add-another-account-btn">
+
+            <span>+</span>
+            Log into another account
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- JAVASCRIPT -->
+
+<script src="script.js"></script>
+
+</body>
+</html>
